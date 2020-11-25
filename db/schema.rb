@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_10_143645) do
+ActiveRecord::Schema.define(version: 2020_11_24_205435) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -131,6 +131,21 @@ ActiveRecord::Schema.define(version: 2020_11_10_143645) do
     t.index ["billing_contract_id"], name: "index_payments_on_billing_contract_id"
   end
 
+  create_table "posts", force: :cascade do |t|
+    t.string "title"
+    t.string "short_description"
+    t.text "long_description"
+    t.string "image"
+    t.boolean "is_visible"
+    t.boolean "is_private"
+    t.bigint "osbb_id"
+    t.bigint "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["osbb_id"], name: "index_posts_on_osbb_id"
+    t.index ["user_id"], name: "index_posts_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "first_name", limit: 50, null: false
     t.string "last_name", limit: 50, null: false
@@ -158,5 +173,7 @@ ActiveRecord::Schema.define(version: 2020_11_10_143645) do
   add_foreign_key "bills", "billing_contracts"
   add_foreign_key "meter_readings", "billing_contracts"
   add_foreign_key "payments", "billing_contracts"
+  add_foreign_key "posts", "osbbs"
+  add_foreign_key "posts", "users"
   add_foreign_key "users", "osbbs"
 end

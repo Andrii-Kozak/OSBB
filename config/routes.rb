@@ -30,6 +30,7 @@ Rails.application.routes.draw do
       resources :payments, only: %i[index show]
     end
     get 'myosbb', to: 'users#myosbb'
+    get 'posts', to: 'users#posts'
     resources :osbbs, defaults: { format: 'json' } do
       get 'search', on: :collection
     end
@@ -69,6 +70,7 @@ Rails.application.routes.draw do
     namespace :v1, format: 'json' do
       get 'balance', to: 'my_osbb#balance'
       resources :news, only: :index
+      resources :posts, except: %i[new edit], defaults: { format: 'json' }
     end
   end
 end
