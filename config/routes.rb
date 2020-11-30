@@ -23,10 +23,17 @@ Rails.application.routes.draw do
         get 'new_assign_osbb'
       end
     end
+
+    resources :comments do
+      resources :comments
+    end
+
     resources :companies do
       resources :utility_providers, only: %i[new update]
     end
-    resources :news
+    resources :news do
+      resources :comments
+    end
     resources :utility_providers, only: %i[index show] do
       get 'search', on: :collection
       put 'disassociate', on: :member
