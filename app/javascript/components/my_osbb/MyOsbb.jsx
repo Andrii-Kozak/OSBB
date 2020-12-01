@@ -5,6 +5,7 @@ import styles from './MyOsbb.module.scss'
 import MyUtilityProviders from './MyUtilityProviders/MyUtilityProviders'
 import Menu from './Menu/Menu'
 import News from './News/News'
+import Posts from "../posts/Posts"
 
 const MyOsbb = (props) => {
     return (
@@ -19,6 +20,7 @@ const MyOsbb = (props) => {
             </div>
           </div>
           <Route path='/:locale/account/myosbb/' render={ () => <News />}/>
+          <Route path='/:locale/account/posts/' render={ () => <Posts />}/>
         </div>  
       </BrowserRouter>
     );

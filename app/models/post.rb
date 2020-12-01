@@ -9,7 +9,6 @@ class Post < ApplicationRecord
   scope :ordered, -> { order('created_at DESC') }
 
   mount_uploader :image, ImageUploader
-  paginates_per 5
 
   private
 

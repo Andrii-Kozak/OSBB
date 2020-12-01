@@ -4,7 +4,7 @@ class Api::V1::PostsController < Api::ApiController
 
   def index
     authorize :post
-    @posts = Post.all
+    @posts = current_user.osbb.posts.all
   end
 
   def show; end
