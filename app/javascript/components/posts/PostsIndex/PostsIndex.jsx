@@ -1,70 +1,88 @@
-import React from 'react'
-import { Pagination } from 'semantic-ui-react'
+import React, { useState, useEffect, Fragment } from 'react'
+import Pagination from 'react-js-pagination'
+import { Link, Route, Switch } from 'react-router-dom'
 import styles from './PostsIndex.module.scss'
-//import ItemPost from '../Posts/ItemPost/ItemPost'
+import Loading from '../shared/Loading'
+import { Button } from 'semantic-ui-react'
+import axios from 'axios'
+import Post from './Post'
+import CreatePost from '../CreatePost/CreatePost'
+import ShowPost from '../ShowPost/ShowPost'
 
 
-class PostsIndex extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      posts: [],
-      page: [],
-      pages: []
+
+const PostsIndex = () => {
+  const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [activePage, setCurrentPage] = useState(1);
+  const [postsPerPage] = useState(3);
+
+
+  useEffect(()=> {
+    const fetchPosts = async () => {
+      setLoading(true);
+      const resp = await axios.get('/api/v1/posts');
+      setPosts(resp.data);
+      setLoading(false);
     };
+
+    fetchPosts();
+
+  }, [posts.length])
+
+  const indexOfLastPost  = activePage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts     = posts.slice( indexOfFirstPost, indexOfLastPost );
+
+  const paginationWisible = () => {
+    if (!loading) {
+      return (
+        <div className='paginationBox'>
+          <Pagination
+            activePage={ activePage }
+            itemsCountPerPage={ postsPerPage }
+            totalItemsCount={ posts.length }
+            pageRangeDisplayed={ Math.ceil(posts.length / postsPerPage) }
+            onChange={ handlePageChange }
+          />
+        </div>
+      )
+    }
   }
 
-  componentDidMount() {
-    fetch('/api/v1/posts')
-      .then((response) => {return response.json()})
-      .then((data) => {this.setState({
-        posts: data.posts,
-        page: data.current_page,
-        pages: data.total_pages
-      }) });
+  const ifLoading = () => {
+    if (loading)
+      return (
+        <Loading />
+      )
   }
   
-
-  handlePage = (e, {activePage}) => {
-    let gotopage = { activePage }
-    let pagenum = gotopage.activePage
-    let pagestring = pagenum.toString()
-    this.setState({
-      loading: true
-    })
-    fetch('/api/v1/posts/?page='+pagestring)
-      .then((response) => {return response.json()})
-      .then((data) => {this.setState({ 
-        posts: data.posts
-       }) });
-  }
-
-  render () {
-    /* var posts = this.state.posts.map((posts) => {
-      return(
-        <ItemPost attributes={posts} />
-      ) 
-    }) */
-
+  const list = currentPosts.map( item => {
     return (
-      <div className={styles.itemsContainer}>
-        {posts}
-        <div>Lorem ipsum sit amet i t d</div>
-        {/* <div className={styles.pagination}>
-          <Pagination
-            onPageChange={this.handlePage}
-            siblingRange='8'
-            defaultActivePage={this.state.page}
-            totalPages={this.state.pages}
-          />
-          
-        </div> */}
-        <p> Return bottom</p>
-      </div>
+      <Post
+        key={item.id}
+        data={item}
+      />
     )
-  }
+  })
+
+  const handlePageChange = ( pageNumber ) => {
+    setCurrentPage( pageNumber )
+  };
+
+  return (
+    <Fragment>
+      <div className={styles.posts}>
+        <CreatePost />
+        {/* <div className={styles.createPost}>
+          <Button title='Add New Post' icon='add' />
+        </div> */}
+        {ifLoading()}
+        {list}
+        {paginationWisible()}
+      </div>
+    </Fragment>
+  );
 }
 
 export default PostsIndex
-
-

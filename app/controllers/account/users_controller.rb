@@ -22,10 +22,6 @@ class Account::UsersController < Account::AccountController
     authorize :user
   end
 
-  def posts
-    # authorize :user
-  end
-
   def new_assign_osbb
     @user = authorize current_user
   end

@@ -1,12 +1,13 @@
-import React, { Fragment } from 'react'
-import styles from './ItemPost.module.scss'
+import React from 'react'
+import styles from './Post.module.scss'
+import { BrouserRouter as Router, Link } from 'react-router-dom'
 
-const ItemPost = (props) => {
+const Post = (props) => {
   return (
     <div className={styles.lightContainer}>
       <div className={styles.postSubBox}>
         <h1 className={styles.title}>
-          <a href={`/account/posts/${props.data.id}`}>{props.data.title}</a>
+          <Link to={`/en/account/posts/${props.data.id}`}>{props.data.title}</Link>
         </h1>
         <p>{props.data.short_description}</p>
       </div>
@@ -15,5 +16,5 @@ const ItemPost = (props) => {
   );
 }
 
-export default ItemPost
+export default Post
 

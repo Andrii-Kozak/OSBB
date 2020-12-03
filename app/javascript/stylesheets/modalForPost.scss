@@ -1,0 +1,10 @@
+body.account {
+  .modals {
+    position: relative;
+    .ui.scrolling.modal.transition.visible.active {
+      left: 50%;
+      transform: translate(-50%);
+      margin: 20px 0;
+    }
+  }
+}

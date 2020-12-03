@@ -30,7 +30,6 @@ Rails.application.routes.draw do
       resources :payments, only: %i[index show]
     end
     get 'myosbb', to: 'users#myosbb'
-    get 'posts', to: 'users#posts'
     resources :osbbs, defaults: { format: 'json' } do
       get 'search', on: :collection
     end
@@ -62,6 +61,7 @@ Rails.application.routes.draw do
       get 'start_impersonate', to: 'admin#start_impersonate', as: 'start_impersonate'
       get 'stop_impersonating', to: 'admin#stop_impersonating', as: 'stop_impersonate'
     end
+    get '*path', to: 'users#myosbb', via: :all
   end
 
   telegram_webhook TelegramWebhooksController

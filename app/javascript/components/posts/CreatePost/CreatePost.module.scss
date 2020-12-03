@@ -1,0 +1,26 @@
+
+.ui.scrolling.modal.transition.visible.active {
+  left: 50%;
+  transform: translate(-50%);
+  margin: 20px 0;
+}
+
+.createPost {
+  position: absolute;
+  left: 10px;
+  top: -32px;
+
+  button {
+    i {
+      color: #4183c4;
+    }
+
+    &:hover {
+      background-color: #448ab5 !important;
+          
+      i {
+        color: #ffffff;
+      }
+    }
+  }  
+}

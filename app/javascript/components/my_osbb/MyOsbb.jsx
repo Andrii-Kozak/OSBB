@@ -5,7 +5,7 @@ import styles from './MyOsbb.module.scss'
 import MyUtilityProviders from './MyUtilityProviders/MyUtilityProviders'
 import Menu from './Menu/Menu'
 import News from './News/News'
-import Posts from "../posts/Posts"
+import Posts from '../posts/Posts'
 
 const MyOsbb = (props) => {
     return (

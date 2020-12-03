@@ -2,7 +2,7 @@ FactoryBot.define do
   factory :post do
     title { Faker::Movies::Hobbit.character }
     short_description { Faker::Movies::Hobbit.quote }
-    long_description { Faker::Lorem.sentence(word_count: 30) }
+    long_description { Faker::Lorem.sentence(word_count: 230) }
     is_visible { true }
     is_private { false }
     user

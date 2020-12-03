@@ -8,5 +8,3 @@
     = link_to t('change_pass.change_pass'), edit_user_registration_path, class: 'btn tablinks'
     - unless current_user.simple?
       = link_to 'Osbb News', account_news_index_path, class: 'btn tablinks'
-    - unless current_user.simple?
-      = link_to 'Osbb Posts', account_posts_path, class: 'btn tablinks'
