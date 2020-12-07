@@ -19,7 +19,7 @@ const MyOsbb = (props) => {
             </div>
           </div>
           <Route path='/:locale/account/myosbb/' render={ () => <News />}/>
-        </div>  
+        </div>
       </BrowserRouter>
     );
 }

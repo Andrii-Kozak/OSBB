@@ -6,7 +6,7 @@ export const InfoHelper = ({ name, value, link}) => {
     <>
     <div className='user-item'>
       <span className='naming-user'>{ name }</span>
-      <span className='insert-user'>{ value? value : 'Unknown'  } { link }</span>
+      <span className='insert-user'>{ value? value : 'Unknown' } { link }</span>
     </div>
     </>
   );

@@ -70,7 +70,7 @@ class ShowUser extends Component {
     return(
       <div data-aos="flip-left"
            data-aos-duration="1500"
-           className='form-component position-relative'
+           className='form-component user-form-max-width zoom-70 position-relative'
       >
         <div className='user-avatar-show'>
           <img src={ show_avatar } alt='Image' className='user-avatar'/>

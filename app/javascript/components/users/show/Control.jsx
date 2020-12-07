@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
-import SvgIconReturn from 'images/svg_icon_return.svg';
-import SvgIconDelete from 'images/svg_icon_delete.svg';
+import SvgIconReturn from '../../../../assets/images/svg_icon_return.svg';
+import SvgIconDelete from '../../../../assets/images/svg_icon_delete.svg';
 
 export class UserShowControl extends Component {
 

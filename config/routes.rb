@@ -24,16 +24,10 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :comments do
-      resources :comments
-    end
-
     resources :companies do
       resources :utility_providers, only: %i[new update]
     end
-    resources :news do
-      resources :comments
-    end
+    resources :news
     resources :utility_providers, only: %i[index show] do
       get 'search', on: :collection
       put 'disassociate', on: :member
@@ -80,7 +74,12 @@ Rails.application.routes.draw do
     namespace :v1, format: 'json' do
       get 'balance', to: 'my_osbb#balance'
       resources :users, only: :show
-      resources :news, only: %i[index show]
+      resources :news, only: %i[index show] do
+        resources :comments
+      end
+      resources :comments do
+        resources :comments
+      end
     end
   end
 end
